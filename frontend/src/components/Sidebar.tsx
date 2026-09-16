@@ -10,11 +10,6 @@ export default function Sidebar() {
   const router = useRouter();
   const [role, setRole] = useState<string | null>(null);
 
-  // Hide sidebar on auth pages
-  if (pathname === "/login" || pathname === "/register") {
-    return null;
-  }
-
   useEffect(() => {
     // Only access localStorage on client-side after mount
     setRole(localStorage.getItem("role"));
