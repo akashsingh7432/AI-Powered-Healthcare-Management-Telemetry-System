@@ -24,16 +24,19 @@ export default function LoginPage() {
 
       if (res.ok) {
         const data = await res.json();
-        // Save token to localStorage 
+        // Save token and role to localStorage 
         localStorage.setItem("token", data.token);
+        localStorage.setItem("role", data.role);
         
-        if (data.role === "DOCTOR") {
+        if (data.role === "ADMIN") {
+          router.push("/admin-dashboard");
+        } else if (data.role === "DOCTOR") {
           router.push("/doctor-dashboard");
         } else {
           router.push("/patient-portal");
         }
       } else {
-        setError("Invalid credentials. Try doctor@clinic.com / password");
+        setError("Invalid credentials.");
       }
     } catch (err) {
       setError("Failed to connect to backend server");
@@ -72,6 +75,9 @@ export default function LoginPage() {
             Authenticate
           </button>
         </form>
+        <p className="mt-4 text-center text-sm text-slate-600">
+          New user? <a href="/register" className="text-teal-600 hover:underline">Create an account</a>
+        </p>
       </div>
     </div>
   );

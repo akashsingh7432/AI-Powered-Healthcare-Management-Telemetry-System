@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Brain, FileText, Activity, AlertCircle } from "lucide-react";
+import AuthGuard from "@/components/AuthGuard";
 
 export default function AIAnalysisPage() {
   const [notes, setNotes] = useState("");
@@ -39,8 +40,9 @@ export default function AIAnalysisPage() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto space-y-6">
-      <div>
+    <AuthGuard allowedRoles={["DOCTOR", "ADMIN"]}>
+      <div className="max-w-5xl mx-auto space-y-6">
+        <div>
         <h2 className="text-3xl font-bold text-slate-800 flex items-center gap-3">
           <Brain className="text-purple-500" size={32} />
           AI Symptom Analysis
@@ -128,7 +130,8 @@ export default function AIAnalysisPage() {
             </div>
           )}
         </div>
+        </div>
       </div>
-    </div>
+    </AuthGuard>
   );
 }

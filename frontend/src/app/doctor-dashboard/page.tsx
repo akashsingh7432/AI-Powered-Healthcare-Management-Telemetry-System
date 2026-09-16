@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { TelemetryWebSocket } from "@/lib/websocket";
 import { Activity, Heart, Thermometer } from "lucide-react";
+import AuthGuard from "@/components/AuthGuard";
 
 export default function DoctorDashboard() {
   const [heartRate, setHeartRate] = useState<number>(72);
@@ -32,8 +33,9 @@ export default function DoctorDashboard() {
   }, []);
 
   return (
-    <div className="space-y-6">
-      <div>
+    <AuthGuard allowedRoles={["DOCTOR", "ADMIN"]}>
+      <div className="space-y-6">
+        <div>
         <h2 className="text-3xl font-bold text-slate-800">Live Telemetry Dashboard</h2>
         <p className="text-slate-500 mt-1">Monitoring Patient: John Doe (ID: #49281)</p>
       </div>
@@ -90,6 +92,7 @@ export default function DoctorDashboard() {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </AuthGuard>
   );
 }
