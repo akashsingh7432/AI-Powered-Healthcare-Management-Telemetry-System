@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: healthcare_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8080/api
+      - NEXT_PUBLIC_WS_URL=ws://localhost:8080/ws
+    networks:
+      - healthcare_network
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: healthcare_backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/healthcare_db
+      - SPRING_DATASOURCE_USERNAME=healthcare_user
+      - SPRING_DATASOURCE_PASSWORD=healthcare_password
+      - JWT_SECRET=super_secret_jwt_key_that_should_be_at_least_256_bits_long_for_hs256
+      - JWT_EXPIRATION_MS=86400000
+    networks:
+      - healthcare_network
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15-alpine
+    container_name: healthcare_db
+    environment:
+      POSTGRES_USER: healthcare_user
+      POSTGRES_PASSWORD: healthcare_password
+      POSTGRES_DB: healthcare_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - healthcare_network
+    restart: unless-stopped
+
+networks:
+  healthcare_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
