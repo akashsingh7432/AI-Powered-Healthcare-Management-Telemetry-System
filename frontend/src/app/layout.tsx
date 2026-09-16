@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
-import { Activity, Calendar, LayoutDashboard, LogOut, User } from "lucide-react";
+import { Activity, Brain, Calendar, LayoutDashboard, LogOut, User } from "lucide-react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -38,6 +38,10 @@ export default function RootLayout({
             <Link href="/doctor-dashboard" className="flex items-center gap-3 px-4 py-3 rounded-lg bg-slate-800 text-teal-400 font-medium transition-colors shadow-sm">
               <Activity size={20} />
               <span>Telemetry</span>
+            </Link>
+            <Link href="/doctor-dashboard/ai-analysis" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
+              <Brain size={20} className="text-purple-400" />
+              <span>AI Analysis</span>
             </Link>
             <Link href="/login" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
               <User size={20} />
