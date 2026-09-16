@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Chrome, Facebook, User, Eye, EyeOff } from "lucide-react";
+import { User, Eye, EyeOff } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -61,24 +61,6 @@ export default function LoginPage() {
           <p className="text-slate-400 text-sm">
             Jump back in to explore, save, and crush it with the best medical platform on the internet.
           </p>
-        </div>
-
-        {/* SSO Buttons */}
-        <div className="grid grid-cols-2 gap-4 mb-8">
-          <button type="button" className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#0F172A] border border-slate-700/50 hover:bg-slate-800 transition-colors text-slate-300 font-medium text-sm">
-            <Chrome size={18} className="text-blue-400" />
-            Google
-          </button>
-          <button type="button" className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#0F172A] border border-slate-700/50 hover:bg-slate-800 transition-colors text-slate-300 font-medium text-sm">
-            <Facebook size={18} className="text-blue-600" />
-            Meta
-          </button>
-        </div>
-
-        <div className="flex items-center mb-8">
-          <div className="flex-1 border-t border-slate-700"></div>
-          <span className="px-4 text-xs font-semibold text-slate-500 tracking-wider uppercase">Or continue with</span>
-          <div className="flex-1 border-t border-slate-700"></div>
         </div>
 
         {error && <div className="mb-6 p-3 bg-red-500/10 border border-red-500/20 text-red-400 rounded-lg text-sm text-center">{error}</div>}
